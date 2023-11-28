@@ -11,11 +11,12 @@ import {
   Box,
   Text,
   Image,
-  useDisclosure
+  useDisclosure,
+  Button
 } from "@chakra-ui/react";
 import styled from "styled-components";
-import TableRow from "../components/TableRow";
 import CoinModal from "../components/CoinModel";
+import Pagination from "../components/Pagination";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
@@ -27,11 +28,11 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [currentPage, ]);
 
   const fetchData = () => {
     setLoading(true);
-    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=INR`;
+    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=INR&per_page=${coinsPerPage}&page=${currentPage}`;
     axios
       .get(`${url}`)
       .then((res) => {
@@ -49,9 +50,21 @@ const HomePage = () => {
     onOpen();
   };
 
+  const handlePaginationChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const totalPages = Math.ceil(data.length / coinsPerPage);
+
+
   return (
     <DIV>
-      <h1>Filter here...</h1>
+      <div>
+        <h1>Filter here...</h1>
+        {/* <Text>Sort by market cap</Text>
+        <Button onClick={()=>handleSortChange("asc")}>Low to High</Button>
+        <Button onClick={()=>handleSortChange("desc")}>High to Low</Button> */}
+      </div>
 
       <Table>
         <Thead>
@@ -77,7 +90,18 @@ const HomePage = () => {
           ))}
         </Tbody>
       </Table>
-      <CoinModal isOpen={isOpen} onClose={onClose} coinDetails={selectedCoin} />
+      {selectedCoin && (
+        <CoinModal
+          isOpen={isOpen}
+          onClose={onClose}
+          coinDetails={selectedCoin}
+        />
+      )}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onChange={handlePaginationChange}
+      />
     </DIV>
   );
 };
@@ -89,7 +113,7 @@ const DIV = styled.div`
     width: 80%;
     margin: auto;
   }
-  tr:hover{
+  tr:hover {
     cursor: pointer;
   }
 `;
