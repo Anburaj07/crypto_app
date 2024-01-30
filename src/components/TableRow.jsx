@@ -9,7 +9,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
-  Box
+  Box,
 } from "@chakra-ui/react";
 
 import { Image, Text } from "@chakra-ui/react";

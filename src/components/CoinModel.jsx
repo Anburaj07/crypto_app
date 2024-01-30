@@ -1,6 +1,16 @@
 // CoinModal.jsx
 import React from "react";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, Box, Image, Text } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  Box,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 
 const CoinModal = ({ isOpen, onClose, coinDetails }) => {
   const {
@@ -34,7 +44,9 @@ const CoinModal = ({ isOpen, onClose, coinDetails }) => {
           <Box>
             <Text>Market Cap Rank: {market_cap_rank}</Text>
             <Text>Current Price: {current_price}</Text>
-            <Text>Price Change 24h: {price_change_percentage_24h.toFixed(2)}%</Text>
+            <Text>
+              Price Change 24h: {price_change_percentage_24h.toFixed(2)}%
+            </Text>
             <Text>Total Volume: {total_volume}</Text>
             <Text>Low 24h: {low_24h}</Text>
             <Text>High 24h: {high_24h}</Text>

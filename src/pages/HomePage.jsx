@@ -12,7 +12,7 @@ import {
   Text,
   Image,
   useDisclosure,
-  Button
+  Button,
 } from "@chakra-ui/react";
 import styled from "styled-components";
 import CoinModal from "../components/CoinModel";
@@ -28,7 +28,7 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchData();
-  }, [currentPage, ]);
+  }, [currentPage]);
 
   const fetchData = () => {
     setLoading(true);
@@ -56,14 +56,10 @@ const HomePage = () => {
 
   const totalPages = Math.ceil(data.length / coinsPerPage);
 
-
   return (
     <DIV>
       <div>
-        <h1>Filter here...</h1>
-        {/* <Text>Sort by market cap</Text>
-        <Button onClick={()=>handleSortChange("asc")}>Low to High</Button>
-        <Button onClick={()=>handleSortChange("desc")}>High to Low</Button> */}
+        <h1 onChange={(e) => e.target.value}>Filter here...</h1>
       </div>
 
       <Table>
